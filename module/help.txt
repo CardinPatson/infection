@@ -1,0 +1,2 @@
+-h :          Renvoie la liste des commandes disponibles
+-infection :  Infecte les fichiers contenus dans le dossier ou se trouve le main.py
