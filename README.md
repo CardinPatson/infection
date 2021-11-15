@@ -1,3 +1,2 @@
 # infection
-
-#python3 main.py -infection
+python3 main.py -infection
